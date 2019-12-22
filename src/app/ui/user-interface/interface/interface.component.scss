@@ -1,0 +1,91 @@
+@import "~src/variables";
+
+/// Description design of user interface
+
+header {
+  height: $header-height;
+  background: $header-bg;
+  padding: $header-padding;
+}
+
+app-toolbar {
+  position: fixed;
+  top: $header-height;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+
+  height: $toolbar-height;
+  background: $toolbar-bg;
+  padding: $toolbar-padding;
+
+  // padding-top: 50px;
+  // padding-bottom: 10px;
+  color: #405065;
+}
+
+main {
+  background: $main-bg;
+  // min-height: $main-min-height;
+  padding-top: $main-pdt;
+}
+
+// aside {
+//   background: $sidenav-bg;
+//   width: $sidenav-width;
+//   min-height: $sidenav-min-height;
+//   position: fixed;
+//   z-index: 1000;
+//   .scroller {
+//     overflow-y: auto;
+//     max-height: $scroller-max-height;
+//     padding-bottom: $scroller-pdb;
+//   }
+// }
+
+.close-aside aside {
+  width: 0;
+  overflow: hidden;
+}
+
+.close-aside .shadow {
+  display: none;
+}
+
+.shadow {
+  background: $shadow-bg;
+  width: $shadow-width;
+  min-height: $shadow-min-height;
+  z-index: 1000;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  // min-height: $main-min-height;
+}
+
+.contents {
+  flex-grow: 1;
+}
+
+
+footer {
+  background: $footer-bg;
+}
+
+@media (min-width: $md-breakpoint) {
+  .shadow {
+    display: none;
+  }
+  // .contents, footer {
+  //   margin-left: $sidenav-width;
+  // }
+
+  .close-aside .contents,
+  .close-aside footer {
+    margin-left: 0;
+  }
+
+}
+

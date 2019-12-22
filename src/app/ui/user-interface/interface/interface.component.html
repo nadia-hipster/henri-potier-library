@@ -1,0 +1,30 @@
+<header class="fixed-top">
+    <app-header #header></app-header>
+</header>
+
+<main [ngClass]="{'close-aside': header.open === false}">
+
+    <div class="shadow position-fixed" (click)="header.open = !header.open">
+    </div>
+
+    <!-- <aside>
+      <div class="scroller">
+        <app-nav></app-nav>
+      </div>
+    </aside> -->
+    <app-toolbar class="fixed-top">
+        <app-search (searchChange)="searchChange($event)"></app-search>
+    </app-toolbar>
+
+    <div class="page">
+        <div class="contents">
+            <router-outlet></router-outlet>
+            <!--      <app-book-list [searchText]="searchText"></app-book-list>-->
+        </div>
+
+        <footer>
+            <app-footer></app-footer>
+        </footer>
+    </div>
+
+</main>

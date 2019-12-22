@@ -1,0 +1,8 @@
+@import "~src/variables";
+
+.toolbar {
+  height: $toolbar-height;
+  .title {
+    padding: 0 $gutter;
+  }
+}

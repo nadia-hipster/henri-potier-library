@@ -1,0 +1,7 @@
+<div class="app-book-list">
+  <div *ngFor="let book of books | search: searchText; let bookIndex = index;">
+    <div class="app-book-list--item">
+      <app-book [book]="book"></app-book>
+    </div>
+  </div>
+</div>

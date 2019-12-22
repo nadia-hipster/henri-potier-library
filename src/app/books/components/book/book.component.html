@@ -1,0 +1,76 @@
+<div class="app-book">
+    <!-- | currency:'EUR':'symbol':'3.2-2':'fr' -->
+    <span class="app-book--price">{{ book?.price | currency:'EUR':'symbol':'2.2-2':'fr' }}</span>
+    <h1 class="app-book--title">{{ book?.title }}</h1>
+    <span class="img-container">
+        <img [src]="book?.cover" title="{{ book?.title }}" alt="{{ book?.title }}">
+    </span>
+
+    <div class="app-book--actions">
+        <!--        <button-->
+        <!--                type="button" class="btn btn-outline-secondary red-tooltip"-->
+        <!--                triggers="click" [autoClose]="'outside'"-->
+        <!--                [ngbTooltip]="book?.synopsis">-->
+        <!--            Lire le résumé-->
+        <!--        </button>-->
+
+
+        <button type="button" class="btn btn-outline-secondary" (click)="open(longContent)">
+            Lire le résumé
+        </button>
+
+        <button type="button" class="btn btn-warning btn--add--cart" (click)="addToCart(book, content);">
+            Ajouter au panier
+        </button>
+
+        <!-- Modals -->
+        <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Mon panier</h4>
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body--cart">
+                    <img [src]="book?.cover" title="{{ book?.title }}" alt="{{ book?.title }}">
+                    <div>
+                        <h3>{{ book?.title }}</h3>
+                        <p>Votre produit a été rajouté au panier ! </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">
+                    << Continuer mes achats
+                </button>
+
+                <a [routerLink]="'/cart/'" [routerLinkActive]="'active'">
+                    <button type="button" ngbAutofocus class="btn btn-warning btn--add--cart" (click)="c('Save click')">
+                        Voir mon panier >>
+                    </button>
+                </a>
+
+            </div>
+        </ng-template>
+
+        <ng-template #longContent let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title">Résumé - {{ book?.title }} </h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body modal-body--resume">
+                <p class="app-book--synopsis">{{book?.synopsis}}</p>
+                <br/>
+                <span class="app-book-isbn">ISBN : {{ book?.isbn }}</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fermer</button>
+            </div>
+        </ng-template>
+
+    </div>
+
+</div>

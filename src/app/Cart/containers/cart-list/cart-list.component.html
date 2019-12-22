@@ -1,0 +1,15 @@
+<div class="app-cart--list">
+    <div *ngFor="let item of bookItems;">
+        <div class="app-cart-list--item">
+            <app-cart-item [item]="item"></app-cart-item>
+        </div>
+    </div>
+
+    <div class="app-cart--list-total">
+       <span class="app-cart--list-total-to-pay">Total : {{totalPrice  | currency:'EUR':'symbol':'2.2-2':'fr' }}</span>
+        Promo : {{bestOffer?.promo  | currency:'EUR':'symbol':'2.2-2':'fr' }}
+
+        <span class="app-cart--list-total-to-pay">Total : {{totalPrice-bestOffer?.promo   | currency:'EUR':'symbol':'2.2-2':'fr' }}</span>
+
+    </div>
+</div>

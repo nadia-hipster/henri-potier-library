@@ -1,0 +1,15 @@
+.app-cart--list {
+    .app-cart--list-total {
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        padding: 30px;
+        max-width: 1280px;
+        background: #fff;
+        margin: 8px auto;
+
+        .app-cart--list-total-to-pay {
+            font-weight: 700;
+        }
+    }
+}
