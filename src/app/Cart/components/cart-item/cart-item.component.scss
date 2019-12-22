@@ -1,0 +1,33 @@
+.cart-item {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    padding: 30px;
+    margin: 8px auto;
+    max-width: 1280px;
+    background: #fff;
+
+    .cart-item--title {
+        color: #232323;
+        font-weight: 400;
+        padding-left: 16px;
+    }
+
+    .cart-item--price--container {
+        margin-left: auto;
+
+        display: flex;
+        flex-direction: column;
+
+        .cart-item--price {
+            font-weight: 700;
+        }
+    }
+
+    .cart-item--img-container {
+        img {
+            width: 130px;
+            max-width: 100%;
+        }
+    }
+}

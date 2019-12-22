@@ -1,0 +1,16 @@
+<div class="cart-item">
+    <span class="cart-item--img-container">
+        <img [src]="item?.cover" title="{{ item?.title }}" alt="{{ item?.title }}">
+    </span>
+    <span class="cart-item--title">{{ item?.title }}</span>
+
+    <div class="cart-item--price--container">
+        <span>{{item.occurence}} X {{ item?.price
+            | currency:'EUR':'symbol':'2.2-2':'fr' }}</span>
+        <span class="cart-item--price">
+            {{ item?.totalPrice
+            | currency:'EUR':'symbol':'2.2-2':'fr' }}
+        </span>wc
+    </div>
+
+</div>
