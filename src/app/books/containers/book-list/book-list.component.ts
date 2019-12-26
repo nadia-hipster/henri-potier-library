@@ -1,34 +1,41 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Book} from 'src/app/shared/models/book';
+import {MessageService} from '../../../shared/services/message.service';
 import {BookService} from '../../services/book.service';
 
 @Component({
-  selector: 'app-book-list',
-  templateUrl: './book-list.component.html',
-  styleUrls: ['./book-list.component.scss']
+    selector: 'app-book-list',
+    templateUrl: './book-list.component.html',
+    styleUrls: ['./book-list.component.scss']
 })
-export class BookListComponent implements OnInit {
+export class BookListComponent implements OnInit, OnDestroy {
 
-  constructor(private bookService: BookService) {
-  }
+    searchText: string;
+    books: Book[];
+    searchSubscription: any;
 
-  @Input()
-  searchText: string;
+    constructor(private bookService: BookService,
+                private messageService: MessageService) {
+    }
 
-  books: Book[];
+    ngOnInit() {
+        this.getBooks();
+        this.searchSubscription = this.messageService.accessMessageSearch().subscribe(
+            (searchItem: string) => {
+                this.searchText = searchItem;
+            }
+        );
+    }
 
-  ngOnInit() {
-    this.getBooks();
-  }
+    private getBooks() {
+        this.bookService.getBooks()
+            .subscribe((book1: Book[]) => {
+                this.books = book1;
+            });
+    }
 
-  private getBooks() {
-    this.bookService.getBooks()
-      .subscribe((book1: Book[]) => {
-        console.log(book1);
-        this.books = book1;
-
-        console.log(this.books);
-      });
-  }
+    ngOnDestroy() {
+        this.searchSubscription.unsubscribe();
+    }
 
 }

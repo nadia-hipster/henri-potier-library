@@ -1,15 +1,79 @@
 <div class="app-cart--list">
-    <div *ngFor="let item of bookItems;">
-        <div class="app-cart-list--item">
-            <app-cart-item [item]="item"></app-cart-item>
+    <div *ngIf="itemsGroupedByIsbn && itemsGroupedByIsbn.length > 0">
+        <div *ngFor="let item of itemsGroupedByIsbn | search: searchText;">
+            <div class="app-cart-list--item">
+                <app-cart-item (deleteChange)="deleteChange(item)"
+                               [item]="item">
+                </app-cart-item>
+            </div>
+        </div>
+
+        <div class="app-cart--list-total">
+            <div class="total-container">
+                <span class="total-to-pay">
+                Total de votre commande avant promotion : {{totalPrice
+                    | currency:'EUR'}}
+                </span>
+                <span class="total-to-pay-promotion">Total à payer : {{totalPrice - bestOffer?.promo | currency:'EUR'}}</span>
+                <span class="promo-total">
+                  Economisé : {{bestOffer?.promo  | currency:'EUR' }}
+                </span>
+
+                <span class="promo">Promotion appliquée sur votre panier : {{bestOffer | promo }}</span>
+            </div>
+
+            <div class="actions">
+                <button (click)="clearCart()" class="btn btn-outline-secondary" type="button">
+                    Vider mon panier
+                </button>
+
+                <a [routerLinkActive]="'active'" [routerLink]="'/'">
+                    <button class="btn btn-warning btn--goto--cart" type="button">
+                        Ajouter des livres à mon panier >>
+                    </button>
+                </a>
+
+                <button (click)="open(content)" class="btn btn-success btn--payer" ngbAutofocus type="button">
+                    Payer
+                </button>
+            </div>
         </div>
     </div>
 
-    <div class="app-cart--list-total">
-       <span class="app-cart--list-total-to-pay">Total : {{totalPrice  | currency:'EUR':'symbol':'2.2-2':'fr' }}</span>
-        Promo : {{bestOffer?.promo  | currency:'EUR':'symbol':'2.2-2':'fr' }}
+    <div *ngIf="!itemsGroupedByIsbn || itemsGroupedByIsbn.length === 0"
+         class="empty">
+        <span> Votre panier est vide !</span>
 
-        <span class="app-cart--list-total-to-pay">Total : {{totalPrice-bestOffer?.promo   | currency:'EUR':'symbol':'2.2-2':'fr' }}</span>
-
+        <a [routerLinkActive]="'active'" [routerLink]="'/'">
+            <button class="btn btn-warning btn--goto--cart" ngbAutofocus type="button">
+                Ajouter des livres à mon panier >>
+            </button>
+        </a>
     </div>
+
+    <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Merci de votre commande</h4>
+            <button (click)="d('Cross click')" aria-label="Close" class="close" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div>
+                <p>Votre commande a bien été enregistrée et sera traitée dans les plus brefs délais.
+                    Si vous avez des questions vous pouvez nous joindre par mail : <a
+                            href="mailto:contact@henripotier.com">contact@henripotier.com</a>
+                </p>
+                <span class="total-to-pay-promotion">Total payé : {{totalPrice - bestOffer?.promo | currency:'EUR'}}</span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a [routerLinkActive]="'active'" [routerLink]="'/'">
+                <button (click)="clearCart(); c('Save click')" class="btn btn-outline-dark" type="button">
+                    << Continuer mes achats
+                </button>
+            </a>
+        </div>
+    </ng-template>
+
 </div>

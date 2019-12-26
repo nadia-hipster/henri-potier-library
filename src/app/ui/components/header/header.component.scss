@@ -1,12 +1,15 @@
 @import "~src/variables";
 
 .header {
-  height: $header-height;
-  .title {
-    padding: 0 $gutter;
-  }
-  fa-icon {
-    font-size: 1.5rem;
-    cursor: pointer;
-  }
+    height: $header-height;
+
+    .title {
+        padding-left: 56px;
+    }
+
+    fa-icon, app-cart-icon {
+        margin-right: 16px;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
 }

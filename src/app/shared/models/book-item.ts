@@ -1,7 +1,7 @@
 import {Book} from './book';
 
-export class BookItem extends Book{
-    occurence: number;
+export class BookItem extends Book {
+    nbr: number;
     totalPrice: number;
 
     constructor(fields?: Partial<BookItem>) {
