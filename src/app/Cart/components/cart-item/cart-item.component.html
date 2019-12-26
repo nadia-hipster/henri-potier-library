@@ -1,16 +1,19 @@
 <div class="cart-item">
     <span class="cart-item--img-container">
-        <img [src]="item?.cover" title="{{ item?.title }}" alt="{{ item?.title }}">
+        <img [src]="item?.cover" alt="{{ item?.title }}" title="{{ item?.title }}">
     </span>
     <span class="cart-item--title">{{ item?.title }}</span>
 
     <div class="cart-item--price--container">
-        <span>{{item.occurence}} X {{ item?.price
-            | currency:'EUR':'symbol':'2.2-2':'fr' }}</span>
+         <span>Quantité : {{item?.nbr}} X Prix unitaire : {{ item?.price
+             | currency:'EUR' }}</span>
         <span class="cart-item--price">
-            {{ item?.totalPrice
-            | currency:'EUR':'symbol':'2.2-2':'fr' }}
-        </span>wc
+            Prix articles : {{ item?.totalPrice
+            | currency:'EUR' }}
+        </span>
+        <button (click)="deleteItem()" class="btn btn-outline-secondary btn-delete-item" type="button">
+            Retirer du panier
+        </button>
     </div>
 
 </div>

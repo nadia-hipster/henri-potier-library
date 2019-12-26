@@ -7,9 +7,6 @@ export class OfferPromo {
     constructor(offer: Offer, promo: number) {
         this.offer = offer;
         this.promo = promo;
-        // if (fields) {
-        //     Object.assign(this, fields);
-        // }
     }
 
 }

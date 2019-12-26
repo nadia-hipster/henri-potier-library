@@ -1,38 +1,30 @@
 import {registerLocaleData} from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
+import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-
+import {SharedModule} from './shared/shared.module';
 import {UiModule} from './ui/ui.module';
-import { CartListComponent } from './Cart/containers/cart-list/cart-list.component';
-import { CartItemComponent } from './Cart/components/cart-item/cart-item.component';
 
-// the second parameter 'fr' is optional
 registerLocaleData(localeFr, 'fr');
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CartListComponent,
-    CartItemComponent
-  ],
-  imports: [
-    BrowserModule,
-    UiModule,
-    NgbModule,
-    FontAwesomeModule
-  ],
-  providers: [/*{
-    provide: LOCALE_ID,
-    useValue: 'fr' // 'de' for Germany, 'fr' for France ...
-   }*/],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        SharedModule,
+        UiModule
+    ],
+    providers: [{
+        provide: LOCALE_ID, useValue: 'fr'
+    }],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }
+
 

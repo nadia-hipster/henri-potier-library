@@ -1,4 +1,4 @@
-import { BookI } from '../interfaces/book-i';
+import {BookI} from '../interfaces/book-i';
 
 export class Book implements BookI {
     isbn = '';

@@ -1,0 +1,22 @@
+@import "~src/variables";
+
+.search {
+    max-width: 500px;
+    padding-bottom: 50px;
+    margin: auto;
+
+    input {
+        width: 100%;
+        padding: 5px 30px;
+        box-shadow: 0 10px 40px 0 $light-blue;
+        font-size: 14px;
+    }
+
+    fa-icon {
+        position: absolute;
+        padding: 5px 8px;
+        min-width: 40px;
+    }
+}
+
+

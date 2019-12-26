@@ -6,6 +6,7 @@ import {Book} from '../../shared/models/book';
 import {Offer} from '../../shared/models/offer';
 import {OfferPromo} from '../../shared/models/offer-promo';
 import {OfferType} from '../../shared/models/offer-type.enum';
+import {MessageService} from '../../shared/services/message.service';
 
 @Injectable({
     providedIn: 'root'
@@ -14,31 +15,44 @@ export class CartService {
     readonly baseUrl = '/api';
     readonly key = 'items';
 
-    items = [];
+    items: Book[] = [];
 
-    constructor(private httpClient: HttpClient) {
+    constructor(private httpClient: HttpClient,
+                private msgService: MessageService) {
     }
 
-    addToCart(product) {
+    addToCart(item: Book) {
         this.items = JSON.parse(localStorage.getItem(this.key));
 
         if (!this.items) {
             this.items = [];
         }
 
-        this.items.push(product);
+        this.items.push(item);
         localStorage.setItem(this.key, JSON.stringify(this.items));
+
+        // Send changes to cartIconComponent
+        this.msgService.sendMessageCart(this.items.length);
     }
 
-    getItems() {
+    getItems(): Book[] {
         this.items = JSON.parse(localStorage.getItem(this.key));
         return this.items;
+    }
+
+    deleteItem(isbn: string) {
+        const deletedItems = this.items.filter(item => item.isbn === isbn);
+        this.items = this.items.filter(item => !deletedItems.includes(item));
+        localStorage.setItem(this.key, JSON.stringify(this.items));
+
+        this.msgService.sendMessageCart(this.items.length);
     }
 
     clearCart() {
         this.items = [];
         localStorage.removeItem(this.key);
-        return this.items;
+
+        this.msgService.sendMessageCart(this.items.length);
     }
 
     getTotalPrice(items: Book[]): number {
@@ -48,9 +62,6 @@ export class CartService {
     getOffers(): Observable<Offer[]> {
         this.items = JSON.parse(localStorage.getItem(this.key));
         const isbns = this.items.map((book: Book) => book.isbn).join(',');
-
-
-        console.log('isbn', isbns);
 
         return this.httpClient.get<Offer[]>(`${this.baseUrl}/${isbns}/commercialOffers/`)
             .pipe(
@@ -78,18 +89,8 @@ export class CartService {
             if (bestOfferPromo.promo < promo) {
                 bestOfferPromo = new OfferPromo(offer, promo);
             }
-
-            // const priceWithPromoOffer = this.calculatePrice(totalPrice, promo);
-            // if (priceWithPromo > priceWithPromoOffer) {
-            //     priceWithPromo = priceWithPromoOffer;
-            //     bestOffer = offer;
-            // }
         });
         return bestOfferPromo;
-    }
-
-    calculatePrice(totalPrice: number, promo: number): number {
-        return totalPrice - promo;
     }
 
     percentage(totalPrice: number, value: number): number {

@@ -1,20 +1,21 @@
 <div class="d-flex align-items-center header">
-
-    <div>
-      <span (click)="open = !open;">
+    <span (click)="open = !open;">
         <fa-icon *ngIf="!open" [icon]="faBars"></fa-icon>
         <fa-icon *ngIf="open" [icon]="faTimes"></fa-icon>
-      </span>
-    </div>
-  
+    </span>
+
     <div class="title flex-grow-1 text-center">
-      <h1>{{ title }}</h1>
+        <h1>{{ title }}</h1>
     </div>
-  
+
     <div>
-      <span>
+        <span class="shopping-cart--fill">
+            <app-cart-icon></app-cart-icon>
+        </span>
+
+        <span>
         <fa-icon [icon]="faUser"></fa-icon>
       </span>
     </div>
-  
-  </div>
+
+</div>

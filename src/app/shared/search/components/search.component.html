@@ -1,0 +1,5 @@
+<div class="search">
+    <fa-icon [icon]="faSearch"></fa-icon>
+    <input (keyup)="search()" [(ngModel)]="searchText" autocomplete="off" class="form-control"
+           name="search" placeholder="Rechercher un livre" type="text"/>
+</div>

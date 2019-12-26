@@ -2,14 +2,70 @@
     .app-cart--list-total {
         display: flex;
         flex-direction: row;
-        align-content: center;
+        justify-content: space-between;
+
         padding: 30px;
         max-width: 1280px;
-        background: #fff;
         margin: 8px auto;
 
-        .app-cart--list-total-to-pay {
-            font-weight: 700;
+        background: #fff;
+
+        .total-container {
+            display: flex;
+            flex-direction: column;
+
+            .total-to-pay {
+                font-size: 13px;
+                text-decoration: line-through;
+            }
+
+            .promo {
+                color: #5c9a03;
+                text-transform: uppercase;
+                margin-top: 16px;
+            }
+
+            .promo-total {
+                color: #5c9a03;
+                font-size: 12px;
+            }
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: column;
+
+            .btn--payer {
+                width: 100%;
+            }
+        }
+
+    }
+
+    .empty {
+        background: #fff;
+        padding: 30px;
+        max-width: 1280px;
+        margin: 8px auto;
+
+        display: flex;
+        justify-content: space-between;
+    }
+
+
+    .btn--goto--cart {
+        background: #f5b027;
+        color: #fff;
+        margin: 8px auto;
+
+        &:hover {
+            background-color: #e0a800;
+            border-color: #d39e00;
         }
     }
+}
+
+.total-to-pay-promotion {
+    font-weight: 700;
+    font-size: 18px;
 }
